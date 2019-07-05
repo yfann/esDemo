@@ -1,6 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.dao.ChildRepository;
+import com.example.demo.dao.FatherRepository;
+import com.example.demo.entity.Child;
 import com.example.demo.entity.Commodity;
+import com.example.demo.entity.Father;
 import com.example.demo.services.CommodityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -17,10 +22,32 @@ public class DemoApplicationTests {
 
 	@Autowired
 	private CommodityService commodityService;
+	@Autowired
+	private ChildRepository childRepository;
+	@Autowired
+	private FatherRepository fatherRepository;
 
 	@Test
 	public void contextLoads() {
 		System.out.println(commodityService.count());
+	}
+
+
+	@Test
+	public void testFatherChild(){
+		String uuid=UUID.randomUUID().toString();
+		Father f=new Father();
+		f.setId(uuid);
+		f.setId("father1");
+		Child c=new Child();
+		c.setName("child1");
+		c.setParentId(uuid);
+		Child c2=new Child();
+		c2.setName("child2");
+		c2.setParentId(uuid);
+		fatherRepository.save(f);
+		childRepository.save(c);
+		childRepository.save(c2);
 	}
 
 	@Test
