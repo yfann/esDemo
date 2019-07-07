@@ -1,11 +1,10 @@
 package com.example.demo;
 
-import com.example.demo.dao.ChildRepository;
-import com.example.demo.dao.FatherRepository;
 import com.example.demo.entity.Child;
 import com.example.demo.entity.Commodity;
 import com.example.demo.entity.Father;
 import com.example.demo.services.CommodityService;
+import com.example.demo.services.EsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +21,9 @@ public class DemoApplicationTests {
 
 	@Autowired
 	private CommodityService commodityService;
+
 	@Autowired
-	private ChildRepository childRepository;
-	@Autowired
-	private FatherRepository fatherRepository;
+	private EsService esService;
 
 	@Test
 	public void contextLoads() {
@@ -38,16 +36,16 @@ public class DemoApplicationTests {
 		String uuid=UUID.randomUUID().toString();
 		Father f=new Father();
 		f.setId(uuid);
-		f.setId("father1");
+		f.setName("father1");
 		Child c=new Child();
 		c.setName("child1");
-		c.setParentId(uuid);
+		c.getSub().setParent(uuid);
 		Child c2=new Child();
 		c2.setName("child2");
-		c2.setParentId(uuid);
-		fatherRepository.save(f);
-		childRepository.save(c);
-		childRepository.save(c2);
+		c2.getSub().setParent(uuid);
+		esService.saveFather(f);
+		esService.saveSon(c,uuid);
+		esService.saveSon(c2,uuid);
 	}
 
 	@Test

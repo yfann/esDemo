@@ -6,3 +6,6 @@ spring:
       local: true
       repositories:
         enabled: true
+es-query:
+  hostname: "localhost"
+  port: 9200

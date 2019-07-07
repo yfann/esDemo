@@ -6,11 +6,13 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Parent;
 
 @Data
-@Document(indexName = "parent-child",type="child")
+@Document(indexName = "parent-child",type="_doc")
 public class Child {
     @Id
     private String id;
     private String name;
-    @Parent(type = "parent")
-    private String parentId;
+    private Sub sub;
+    public Child(){
+        this.sub=new Sub("son");
+    }
 }
