@@ -36,12 +36,12 @@ public class DemoApplicationTests {
 		String uuid=UUID.randomUUID().toString();
 		Father f=new Father();
 		f.setId(uuid);
-		f.setName("father1");
+		f.setName("father2");
 		Child c=new Child();
-		c.setName("child1");
+		c.setName("child3");
 		c.getSub().setParent(uuid);
 		Child c2=new Child();
-		c2.setName("child2");
+		c2.setName("child4");
 		c2.getSub().setParent(uuid);
 		esService.saveFather(f);
 		esService.saveSon(c,uuid);

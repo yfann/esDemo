@@ -23,7 +23,8 @@ public class EsService {
     public void saveFather(Father f){
         String method = "POST";
         try (NStringEntity entity = new NStringEntity(mapper.writeValueAsString(f), ContentType.APPLICATION_JSON);) {
-            Request request = new Request(method, URL);
+            Request request = new Request(method, URL+"/"+f.getId());
+            //Request request = new Request(method, URL);
             request.setEntity(entity);
             Response response = restClient.performRequest(request);
        } catch (Exception e) {
